@@ -1,10 +1,15 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.util.Scanner;
 
 
 
 public class GameMain extends JPanel implements MouseListener{
+	
+	//*** JEN ADDED ***
+	private static Scanner scanInput = new Scanner(System.in);
+	
 	//Constants for game 
 	// number of ROWS by COLS cell constants 
 	public static final int ROWS = 3;     
@@ -26,7 +31,7 @@ public class GameMain extends JPanel implements MouseListener{
 	// the game board 
 	private Board board;
 	 	 
-	//TODO: create the enumeration for the variable below (GameState currentState)
+	//TODO: ***JEN DONE*** Create the enumeration for the variable below (GameState currentState)
 	//HINT all of the states you require are shown in the code within GameMain
 	private GameState currentState; 
 	
@@ -40,7 +45,8 @@ public class GameMain extends JPanel implements MouseListener{
 	public GameMain() {   
 		
 		// TODO: This JPanel fires a MouseEvent on MouseClicked so add required event listener to 'this'.          
-	    
+		 // *** JEN ADDED ***
+		addMouseListener(this);
 	    
 		// Setup the status bar (JLabel) to display status message       
 		statusBar = new JLabel("         ");       
@@ -57,9 +63,13 @@ public class GameMain extends JPanel implements MouseListener{
 		
 		
 		// TODO: Create a new instance of the game "Board"class. HINT check the variables above for the correct name
-
+		//*** JEN ADDED ***
+		board = new Board();
 		
 		//TODO: call the method to initialise the game board
+		//*** JEN ADDED ***
+		initGame();
+
 
 	}
 	
@@ -71,11 +81,16 @@ public class GameMain extends JPanel implements MouseListener{
 				JFrame frame = new JFrame(TITLE);
 				
 				//TODO: create the new GameMain panel and add it to the frame
-						
-				
+				// *** JEN ADDED *** 
+				///////////////////
+				/*JPanel panel = new JPanel();
+				panel.setPreferredSize(new Dimension(300, 300))
+				frame.getContentPane().add(panel);
+				new GameMain();	*/
 				
 				//TODO: set the default close operation of the frame to exit_on_close
-		            
+		        //*** JEN ADDED ***
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    
 				
 				frame.pack();             
 				frame.setLocationRelativeTo(null);
@@ -83,6 +98,7 @@ public class GameMain extends JPanel implements MouseListener{
 	         }
 		 });
 	}
+	
 	/** Custom painting codes on this JPanel */
 	public void paintComponent(Graphics g) {
 		//fill background and set colour to white
@@ -97,12 +113,14 @@ public class GameMain extends JPanel implements MouseListener{
 			if (currentPlayer == Player.Cross) {   
 			
 				//TODO: use the status bar to display the message "X"'s Turn
-
+				// *** JEN ADDED ***
+				statusBar.setText("X's turn");
 				
 			} else {    
 				
 				//TODO: use the status bar to display the message "O"'s Turn
-
+				// *** JEN ADDED ***
+				statusBar.setText("0's turn");
 				
 			}       
 			} else if (currentState == GameState.Draw) {          
@@ -141,12 +159,18 @@ public class GameMain extends JPanel implements MouseListener{
 			if(board.hasWon(thePlayer, row, col)) {
 				
 				// TODO: check which player has won and update the currentstate to the appropriate gamestate for the winner
-
+				/////////////////////////////////////////////////////////
+				if (currentPlayer == Player.Cross) {
+					currentState = GameState.Cross_won;
+				}
+				currentState = GameState.Nought_won;
 				
 			} else 
 				if (board.isDraw ()) {
 					
 				// TODO: set the currentstate to the draw gamestate
+					//*** JEN ADDED ***
+					currentState = GameState.Draw;
 
 			}
 			//otherwise no change to current state of playing
@@ -190,22 +214,22 @@ public class GameMain extends JPanel implements MouseListener{
 		
 	
 	@Override
-	public void mousePressed(MouseEvent e) {
+	public void mousePressed(MouseEvent event) {
 		//  Auto-generated, event not used
 		
 	}
 	@Override
-	public void mouseReleased(MouseEvent e) {
+	public void mouseReleased(MouseEvent event) {
 		//  Auto-generated, event not used
 		
 	}
 	@Override
-	public void mouseEntered(MouseEvent e) {
+	public void mouseEntered(MouseEvent event) {
 		// Auto-generated,event not used
 		
 	}
 	@Override
-	public void mouseExited(MouseEvent e) {
+	public void mouseExited(MouseEvent event) {
 		// Auto-generated, event not used
 		
 	}
