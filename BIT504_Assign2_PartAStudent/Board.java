@@ -38,8 +38,7 @@ public class Board {
 				    return false; // empty cell found, not a draw
 				}
 		    }
-		}
-		return true; 
+		} return true;
 	}
 		
 	
