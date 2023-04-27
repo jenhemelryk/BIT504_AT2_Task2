@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class GameMain extends JPanel implements MouseListener{
 	
 	//*** JEN ADDED ***
-	private static Scanner scanInput = new Scanner(System.in);
+	//private static Scanner scanInput = new Scanner(System.in);
 	
 	//Constants for game 
 	// number of ROWS by COLS cell constants 
@@ -30,6 +30,9 @@ public class GameMain extends JPanel implements MouseListener{
 	/*declare game object variables*/
 	// the game board 
 	private Board board;
+	
+	//**JEN ADDED ***
+	private Cell cell;
 	 	 
 	//TODO: ***JEN DONE*** Create the enumeration for the variable below (GameState currentState)
 	//HINT all of the states you require are shown in the code within GameMain
@@ -70,7 +73,6 @@ public class GameMain extends JPanel implements MouseListener{
 		//*** JEN ADDED ***
 		initGame();
 
-
 	}
 	
 	public static void main(String[] args) {
@@ -82,11 +84,7 @@ public class GameMain extends JPanel implements MouseListener{
 				
 				//TODO: create the new GameMain panel and add it to the frame
 				// *** JEN ADDED *** 
-				///////////////////
-				/*JPanel panel = new JPanel();
-				panel.setPreferredSize(new Dimension(300, 300))
-				frame.getContentPane().add(panel);
-				new GameMain();	*/
+				frame.getContentPane().add(new GameMain());
 				
 				//TODO: set the default close operation of the frame to exit_on_close
 		        //*** JEN ADDED ***
@@ -159,19 +157,18 @@ public class GameMain extends JPanel implements MouseListener{
 			if(board.hasWon(thePlayer, row, col)) {
 				
 				// TODO: check which player has won and update the currentstate to the appropriate gamestate for the winner
-				/////////////////////////////////////////////////////////
+				//*** JEN ADDED ***
 				if (currentPlayer == Player.Cross) {
 					currentState = GameState.Cross_won;
-				}
+				} else {
 				currentState = GameState.Nought_won;
+				}	
 				
-			} else 
-				if (board.isDraw ()) {
+			} else if (board.isDraw()) {
 					
 				// TODO: set the currentstate to the draw gamestate
-					//*** JEN ADDED ***
-					currentState = GameState.Draw;
-
+				//*** JEN ADDED ***
+				currentState = GameState.Draw;
 			}
 			//otherwise no change to current state of playing
 		}
@@ -182,10 +179,10 @@ public class GameMain extends JPanel implements MouseListener{
 		 *  UpdateGame is called which will call the methods to check for winner or Draw. if none then GameState remains playing.
 		 *  If win or Draw then call is made to method that resets the game board.  Finally a call is made to refresh the canvas so that new symbol appears*/
 	
-	public void mouseClicked(MouseEvent e) {  
+	public void mouseClicked(MouseEvent event) {  
 	    // get the coordinates of where the click event happened            
-		int mouseX = e.getX();             
-		int mouseY = e.getY();             
+		int mouseX = event.getX();             
+		int mouseY = event.getY();             
 		// Get the row and column clicked             
 		int rowSelected = mouseY / CELL_SIZE;             
 		int colSelected = mouseX / CELL_SIZE;               			
@@ -208,8 +205,9 @@ public class GameMain extends JPanel implements MouseListener{
 			initGame();            
 		}   
 		
-		//TODO: redraw the graphics on the UI          
-           
+		//TODO: redraw the graphics on the UI 
+		repaint();
+		
 	}
 		
 	
