@@ -3,24 +3,24 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+
 public class Cell {
+	
     //content of this cell (empty, cross, nought)
 	Player content;
 	//row and column of this cell
 	int row, col;
 	
 	/** Constructor to initialise this cell with the specified row and col */
-	public Cell(int row, int col) {
-		
-		// TODO: Initialise the variables row, col 
+	public Cell(int row, int col) {		
+		//initialising variables row, col 
 		this.row = row;
 		this.col = col;
 		
-		//TODO: call the method that sets the cell content to EMPTY
+		//method to set cell content to EMPTY
 		 clear();
 	}
 	
-
 	/** Paint itself on the graphics canvas, given the Graphics context g */ 
 	public void paint(Graphics g) {
 		//Graphics2D allows setting of pen's stroke size
@@ -43,12 +43,9 @@ public class Cell {
 	}
 	
 	/** Set this cell's content to EMPTY */
-	public void clear() {
-		
-		// TODO: Set the value of content to Empty (Remember this is an enum)
-		//*** JEN ADDED ***
-		content = Player.Empty;
-		
+	public void clear() {	
+		//set content to Empty
+		content = Player.Empty;		
 	}
 		
 }
