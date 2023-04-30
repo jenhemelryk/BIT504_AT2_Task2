@@ -18,7 +18,7 @@ public class Cell {
 		this.col = col;
 		
 		//method to set cell content to EMPTY
-		 clear();
+		clear();
 	}
 	
 	/** Paint itself on the graphics canvas, given the Graphics context g */ 
@@ -36,7 +36,7 @@ public class Cell {
 			int y2 = (row + 1) * GameMain.CELL_SIZE - GameMain.CELL_PADDING;
 			graphic2D.drawLine(x1, y1, x2, y2);
 			graphic2D.drawLine(x2, y1, x1, y2);
-		}else if (content == Player.Nought) {
+		} else if (content == Player.Nought) {
 			graphic2D.setColor(Color.BLUE);
 			graphic2D.drawOval(x1, y1, GameMain.SYMBOL_SIZE, GameMain.SYMBOL_SIZE);
 		}
